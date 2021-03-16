@@ -6,7 +6,18 @@
 ![arch](/img/arch.png)
 
 <br><br>
-## AWS CodeCommit
+## 1. AWS Cloud9
+
+![cloud9](/img/cloud9.png)
+
+### AWS Cloud9 CLI
+
+    - ```aws cloud9 create-environment-ec2 --name my-demo-environment --description "This environment is for the AWS Cloud9 tutorial." --instance-type t2.micro --region MY-REGION --connection-type CONNECT_SSM --subnet-id subnet-12a3456b --automatic-stop-time-minutes 30 --owner-arn arn:aws:iam::123456789012:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9```
+
+    - ```git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo```
+
+<br><br>
+## 2. AWS CodeCommit
 
 ![arc-workflow](/img/arc-workflow.png)
 
@@ -36,9 +47,9 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 3. Delete reposotory
 
-    - ```aws codecommit delete-repository --repository-name MytestRepo```
+    - ```aws codecommit delete-repository --repository-name MyTestRepo```
 
-4. Connect to the CodeCommit repository by cloning the repository
+4. GIT
 
     - ```git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo```
     - ```git remote add origin https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo```
