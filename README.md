@@ -25,7 +25,7 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 > How is CodeCommit different from file versioning in Amazon S3?
 > CodeCommit is optimized for team software development. It manages batches of changes across multiple files, which can occur in parallel with changes made by other developers. Amazon S3 versioning supports the recovery of past versions of files, but it's not focused on collaborative file tracking features that software development teams need. 
 
-# CodeCommit CLI
+## CodeCommit CLI
 
 1. List repositories
     - ```aws codecommit list-repositories```
@@ -37,6 +37,14 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 3. Delete reposotory
 
     - ```aws codecommit delete-repository --repository-name MytestRepo```
+
+4. Connect to the CodeCommit repository by cloning the repository
+
+    - ```git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo```
+    - ```git remote add origin https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo```
+    - ```git add bees.txt```
+    - ```git commit -m "Added bees.txt"```
+    - ```git push -u origin main```
 
 <br><br>
 ## AWS
