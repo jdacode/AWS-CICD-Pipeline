@@ -28,15 +28,15 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 # CodeCommit CLI
 
 1. List repositories
-```aws codecommit list-repositories```
+    - ```aws codecommit list-repositories```
 
 2. Create repository
 
-```aws codecommit create-repository --repository-name MyTestRepo --repository-description "My Test Repo" --tags Team=Dev```
+    - ```aws codecommit create-repository --repository-name MyTestRepo --repository-description "My Test Repo" --tags Team=Dev```
 
 3. Delete reposotory
 
-```aws codecommit delete-repository --repository-name MytestRepo```
+    - ```aws codecommit delete-repository --repository-name MytestRepo```
 
 <br><br>
 ## AWS
