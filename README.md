@@ -1,5 +1,5 @@
 
-# AWS-CICD-Pipeline-1stEdtn
+# AWS-CICD-Pipeline-Node.js
 
 ## Architecture 
 
@@ -9,6 +9,34 @@
 ## AWS CodeCommit
 
 ![arc-workflow](/img/arc-workflow.png)
+
+
+
+    1. Use the AWS CLI or the CodeCommit console to create a CodeCommit repository.
+
+    2. From your development machine, use Git to run git clone, specifying the name of the CodeCommit repository. This creates a local repo that connects to the CodeCommit repository.
+
+    3. Use the local repo on your development machine to modify (add, edit, and delete) files, and then run git add to stage the modified files locally. Run git commit to commit the files locally, and then run git push to send the files to the CodeCommit repository.
+
+    4. Download changes from other users. Run git pull to synchronize the files in the CodeCommit repository with your local repo. This ensures you're working with the latest version of the files.
+
+You can use the AWS CLI or the CodeCommit console to track and manage your repositories.
+
+> How is CodeCommit different from file versioning in Amazon S3?
+> CodeCommit is optimized for team software development. It manages batches of changes across multiple files, which can occur in parallel with changes made by other developers. Amazon S3 versioning supports the recovery of past versions of files, but it's not focused on collaborative file tracking features that software development teams need. 
+
+# CodeCommit CLI
+
+1. List repositories
+```aws codecommit list-repositories```
+
+2. Create repository
+
+```aws codecommit create-repository --repository-name MyTestRepo --repository-description "My Test Repo" --tags Team=Dev```
+
+3. Delete reposotory
+
+```aws codecommit delete-repository --repository-name MytestRepo```
 
 <br><br>
 ## AWS
