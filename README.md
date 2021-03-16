@@ -4,8 +4,13 @@
 ## Architecture 
 
 ![arch](/img/arch.png)
-<br><br>
 
+<br><br>
+## AWS CodeCommit
+
+![arch-workflow](/img/arc-workflow.png)
+
+<br><br>
 ## AWS
 
 https://docs.aws.amazon.com/codedeploy/latest/userguide/deployments-view-logs.html
