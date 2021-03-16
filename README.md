@@ -8,7 +8,7 @@
 <br><br>
 ## AWS CodeCommit
 
-![arch-workflow](/img/arc-workflow.png)
+![arc-workflow](/img/arc-workflow.png)
 
 <br><br>
 ## AWS
