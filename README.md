@@ -274,10 +274,6 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
                 runas: root
 ```    
 
-- ```aws iam create-role --role-name CodeDeployServiceRole --assume-role-policy-document file://codedeploy-policy.json```
-    
-- ```aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole --role-name CodeDeployServiceRole```
-
 
 ### IAM
 
@@ -297,9 +293,15 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
     - ```aws iam add-role-to-instance-profile --instance-profile-name CodeDeploy-EC2-Instance-Profile --role-name CodeDeploy-EC2-Instance-Profile```
 
-5. Create a Role & Attach Policy to Role[CodeDeploy]
+5. (Option-1) Create a Role [CodeDeploy]
 
     - ```aws iam create-role --role-name CodeDeployRole --assume-role-policy-document file://AWSCodeDeployRole.json```
+
+5. (Option-2) Attach Policy to Role [CodeDeploy]
+
+    - ```aws iam create-role --role-name CodeDeployServiceRole```
+
+    - ```aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole --role-name CodeDeployServiceRole```
 
 ### EC2
 
