@@ -242,11 +242,88 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 ![codedeploy1](/img/codedeploy1.png)
 ![codedeploy2](/img/codedeploy2.png)
+![codedeploy3](/img/codedeploy3.png)
 
 ## CodeDeploy CLI
-    
-    - ``````
 
+
+1. appsec.yml 
+
+```
+        version: 0.0
+        os: [linux|windows]
+        files:  
+            - source: /directory/root/to/install/from    
+            destination: /directory/to/install/to
+        hooks:  
+            BeforeInstall:    
+                - location: scripts/before-intall.sh      
+                timeout: 300      
+                runas: root  
+            AfterInstall:    
+                - location: scripts/after-install.sh      
+                timeout: 60      
+                runas: root  
+            ApplicationStart:    
+                - location: scripts/start-service.sh      
+                timeout: 60      
+                runas: root  
+            ApplicationStop:    
+                - location: scripts/stop-service.sh      
+                timeout: 60      
+                runas: root
+```    
+
+- ```aws iam create-role --role-name CodeDeployServiceRole --assume-role-policy-document file://codedeploy-policy.json```
+    
+- ```aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole --role-name CodeDeployServiceRole```
+
+
+### IAM
+
+1. Create a Role [EC2]
+
+    - ```aws iam create-role --role-name CodeDeploy-EC2-Instance-Profile --assume-role-policy-document file://CodeDeploy-EC2-Trust.json```
+
+2. Attach Policy to Role [EC2]
+
+    - ```aws iam put-role-policy --role-name CodeDeploy-EC2-Instance-Profile --policy-name CodeDeploy-EC2-Permissions --policy-document file://CodeDeploy-EC2-Permissions.json```
+
+3. Create Instance Profile [EC2] [Use an instance profile to pass an IAM role to an EC2 instance.]
+
+    - ```aws iam create-instance-profile --instance-profile-name CodeDeploy-EC2-Instance-Profile```
+
+4. Add Role to Instance Profile [EC2]
+
+    - ```aws iam add-role-to-instance-profile --instance-profile-name CodeDeploy-EC2-Instance-Profile --role-name CodeDeploy-EC2-Instance-Profile```
+
+5. Create a Role & Attach Policy to Role[CodeDeploy]
+
+    - ```aws iam create-role --role-name CodeDeployRole --assume-role-policy-document file://AWSCodeDeployRole.json```
+
+### EC2
+
+7. Create a EC2 Instance
+
+        Add tag: Key= Name, Value= ic2name
+        Attach Role
+
+9. Install CodeDeploy agent in EC2 Instance
+
+        https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html
+
+### CodeDeploy
+10. Create via Console
+    Compute Plataaform: EC2/On-prenises
+    Deployment type: In-place deployment
+    Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ic2name]
+    Service Role: CodeDeploy-Role
+11. Actions
+        Deploy new version
+        Revision location: s3://bucket-name/folder/object.zip
+12. Logs in IC2 Instance Server
+    tail -f ./aws/codedeploy-agent/codedeploy-agent.log
+13. Browse into the ip IC2 Instance to connect to the webpage
 
 
 <br><br>
