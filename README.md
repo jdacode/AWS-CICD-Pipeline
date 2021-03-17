@@ -204,11 +204,33 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 ```
 
 
-**Step 4**: Upload the source code and the buildspec file
+4. **Step 4**: Create the build project 
 
-    - ``````
-    - ``````
-    - ``````
+    - ```aws codebuild create-project --generate-cli-skeleton```
+    - cat > create-project.json 
+        ```
+        {
+        "name": "codebuild-demo-project",
+        "source": {
+            "type": "S3",
+            "location": "codebuild-region-ID-account-ID-input-bucket/MessageUtil.zip"
+        },
+        "artifacts": {
+            "type": "S3",
+            "location": "codebuild-region-ID-account-ID-output-bucket"
+        },
+        "environment": {
+            "type": "LINUX_CONTAINER",
+            "image": "aws/codebuild/standard:4.0",
+            "computeType": "BUILD_GENERAL1_SMALL"
+        },
+        "serviceRole": "serviceIAMRole"
+        }
+        ```
+    - ```aws codebuild create-project --cli-input-json file://create-project.json```
+
+5. **Step 5**: Run the build
+
     - ``````
     - ``````
     - ``````
