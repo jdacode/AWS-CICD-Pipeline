@@ -71,26 +71,26 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 ### CodeBuild
 
-**Step 1**: Create two S3 buckets
+1. **Step 1**: Create two S3 buckets
 
     - ```aws s3 ls```
     - ```aws s3api create-bucket --bucket codebuild-artifact-bucket-45546423 --region us-east-1```
 
-**Step 2**: Create the source code
+2. **Step 2**: Create the source code
 
     - ```aws codecommit list-repositories```
     - ```aws codecommit get-folder --repository-name MyRepo --folder-path ""```
 
-**Step 3**: Create the buildspec file
+3. **Step 3**: Create the buildspec file
 
-    The buildspec file must be named buildspec.yml and placed in the root of your source directory.
+The buildspec file must be named buildspec.yml and placed in the root of your source directory.
 
-        - Use a different buildspec file for different builds in the same repository, such as buildspec_debug.yml and buildspec_release.yml.
-        - Store a buildspec file somewhere other than the root of your source directory, such as config/buildspec.yml or in an S3 bucket. The S3 bucket must be in the same AWS Region as your build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
+- Use a different buildspec file for different builds in the same repository, such as buildspec_debug.yml and buildspec_release.yml.
+- Store a buildspec file somewhere other than the root of your source directory, such as config/buildspec.yml or in an S3 bucket. The S3 bucket must be in the same AWS Region as your build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
 
-    If a command contains a character, or a string of characters, that is not supported by YAML, you must enclose the command in quotation marks (""). The following command is enclosed in quotation marks because a colon (:) followed by a space is not allowed in YAML. The quotation mark in the command is escaped (\"). 
+If a command contains a character, or a string of characters, that is not supported by YAML, you must enclose the command in quotation marks (""). The following command is enclosed in quotation marks because a colon (:) followed by a space is not allowed in YAML. The quotation mark in the command is escaped (\"). 
 
-        > eg: "export PACKAGE_NAME=$(cat package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')"
+> eg: "export PACKAGE_NAME=$(cat package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')"
 
 ```
         version: 0.2
