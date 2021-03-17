@@ -83,123 +83,125 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 **Step 3**: Create the buildspec file
 
-    The buildspec file must be named buildspec.yml and placed in the root of your source directory.
+The buildspec file must be named buildspec.yml and placed in the root of your source directory.
 
-        - Use a different buildspec file for different builds in the same repository, such as buildspec_debug.yml and buildspec_release.yml.
-        - Store a buildspec file somewhere other than the root of your source directory, such as config/buildspec.yml or in an S3 bucket. The S3 bucket must be in the same AWS Region as your build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
+- Use a different buildspec file for different builds in the same repository, such as buildspec_debug.yml and buildspec_release.yml.
+- Store a buildspec file somewhere other than the root of your source directory, such as config/buildspec.yml or in an S3 bucket. The S3 bucket must be in the same AWS Region as your build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml).
 
-    If a command contains a character, or a string of characters, that is not supported by YAML, you must enclose the command in quotation marks (""). The following command is enclosed in quotation marks because a colon (:) followed by a space is not allowed in YAML. The quotation mark in the command is escaped (\"). 
+If a command contains a character, or a string of characters, that is not supported by YAML, you must enclose the command in quotation marks (""). The following command is enclosed in quotation marks because a colon (:) followed by a space is not allowed in YAML. The quotation mark in the command is escaped (\"). 
 
-        > eg: "export PACKAGE_NAME=$(cat package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')"
+> eg: "export PACKAGE_NAME=$(cat package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g')"
 
-            ```version: 0.2
+```
+version: 0.2
 
-            run-as: Linux-user-name
+run-as: Linux-user-name
 
-            env:
-                shell: shell-tag
-                variables:
-                    key: "value"
-                    key: "value"
-                parameter-store:
-                    key: "value"
-                    key: "value"
-                exported-variables:
-                    - variable
-                    - variable
-                secrets-manager:
-                    key: secret-id:json-key:version-stage:version-id
-                git-credential-helper: no | yes
+env:
+    shell: shell-tag
+    variables:
+        key: "value"
+        key: "value"
+    parameter-store:
+        key: "value"
+        key: "value"
+    exported-variables:
+        - variable
+        - variable
+    secrets-manager:
+        key: secret-id:json-key:version-stage:version-id
+    git-credential-helper: no | yes
 
-            proxy:
-                upload-artifacts: no | yes
-                logs: no | yes
+proxy:
+    upload-artifacts: no | yes
+    logs: no | yes
 
-            batch:
-                fast-fail: false | true
-                # build-list:
-                # build-matrix:
-                # build-graph:
-                    
-            phases:
-                install:
-                    run-as: Linux-user-name
-                    on-failure: ABORT | CONTINUE
-                    runtime-versions:
-                        runtime: version
-                        runtime: version
-                    commands:
-                        - command
-                        - command
-                    finally:
-                        - command
-                        - command
-                pre_build:
-                    run-as: Linux-user-name
-                    on-failure: ABORT | CONTINUE
-                    commands:
-                        - command
-                        - command
-                    finally:
-                        - command
-                        - command
-                build:
-                    run-as: Linux-user-name
-                    on-failure: ABORT | CONTINUE
-                    commands:
-                        - command
-                        - command
-                    finally:
-                        - command
-                        - command
-                post_build:
-                    run-as: Linux-user-name
-                    on-failure: ABORT | CONTINUE
-                    commands:
-                        - command
-                        - command
-                    finally:
-                        - command
-                        - command
+batch:
+    fast-fail: false | true
+    # build-list:
+    # build-matrix:
+    # build-graph:
+        
+phases:
+    install:
+        run-as: Linux-user-name
+        on-failure: ABORT | CONTINUE
+        runtime-versions:
+            runtime: version
+            runtime: version
+        commands:
+            - command
+            - command
+        finally:
+            - command
+            - command
+    pre_build:
+        run-as: Linux-user-name
+        on-failure: ABORT | CONTINUE
+        commands:
+            - command
+            - command
+        finally:
+            - command
+            - command
+    build:
+        run-as: Linux-user-name
+        on-failure: ABORT | CONTINUE
+        commands:
+            - command
+            - command
+        finally:
+            - command
+            - command
+    post_build:
+        run-as: Linux-user-name
+        on-failure: ABORT | CONTINUE
+        commands:
+            - command
+            - command
+        finally:
+            - command
+            - command
 
-            reports:
-                report-group-name-or-arn:
-                    files:
-                        - location
-                        - location
-                    base-directory: location
-                    discard-paths: no | yes
-                    file-format: report-format
+reports:
+    report-group-name-or-arn:
+        files:
+            - location
+            - location
+        base-directory: location
+        discard-paths: no | yes
+        file-format: report-format
 
-            artifacts:
-                files:
-                    - location
-                    - location
-                name: artifact-name
-                discard-paths: no | yes
-                base-directory: location
-                exclude-paths: excluded paths
-                enable-symlinks: no | yes
-                s3-prefix: prefix
-                secondary-artifacts:
-                    artifactIdentifier:
-                    files:
-                        - location
-                        - location
-                    name: secondary-artifact-name
-                    discard-paths: no | yes
-                    base-directory: location
-                    artifactIdentifier:
-                    files:
-                        - location
-                        - location
-                    discard-paths: no | yes
-                    base-directory: location
-                    
-            cache:
-                paths:
-                    - path
-                    - path```
+artifacts:
+    files:
+        - location
+        - location
+    name: artifact-name
+    discard-paths: no | yes
+    base-directory: location
+    exclude-paths: excluded paths
+    enable-symlinks: no | yes
+    s3-prefix: prefix
+    secondary-artifacts:
+        artifactIdentifier:
+        files:
+            - location
+            - location
+        name: secondary-artifact-name
+        discard-paths: no | yes
+        base-directory: location
+        artifactIdentifier:
+        files:
+            - location
+            - location
+        discard-paths: no | yes
+        base-directory: location
+        
+cache:
+    paths:
+        - path
+        - path
+```
 
 
 **Step 4**: Upload the source code and the buildspec file
