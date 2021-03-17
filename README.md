@@ -231,8 +231,20 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 5. **Step 5**: Run the build
 
-    - ``````
-    - ``````
+    - ```aws codebuild start-build --project-name project-name```
+
+6. **Step 6**: View summarized build information
+
+    - ```aws codebuild batch-get-builds --ids id```
+
+<br><br>
+## CodeDeploy
+
+![codedeploy1](/img/codedeploy1.png)
+![codedeploy2](/img/codedeploy2.png)
+
+## CodeDeploy CLI
+    
     - ``````
 
 
