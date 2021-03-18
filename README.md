@@ -305,27 +305,34 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 ### EC2
 
-7. Create a EC2 Instance
+7. Create a EC2 Instance [Console]
 
-        Add tag: Key= Name, Value= ic2name
+        Add tag: Key= Name, Value= ec2name
         Attach Role
 
-9. Install CodeDeploy agent in EC2 Instance
+9. Install CodeDeploy agent in EC2 Instance [EC2-SSH]
 
         https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html
 
 ### CodeDeploy
+
 10. Create via Console
+
     Compute Plataaform: EC2/On-prenises
     Deployment type: In-place deployment
     Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ic2name]
     Service Role: CodeDeploy-Role
+
 11. Actions
+
         Deploy new version
         Revision location: s3://bucket-name/folder/object.zip
-12. Logs in IC2 Instance Server
+
+12. Logs in EC2 Instance Server
+
     tail -f ./aws/codedeploy-agent/codedeploy-agent.log
-13. Browse into the ip IC2 Instance to connect to the webpage
+
+13. Browse into the ip EC2 Instance to connect to the webpage
 
 
 <br><br>
