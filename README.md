@@ -240,9 +240,8 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 <br><br>
 ## CodeDeploy
 
-![codedeploy1](/img/codedeploy1.png)
-![codedeploy2](/img/codedeploy2.png)
 ![codedeploy3](/img/codedeploy3.png)
+![codedeploy1](/img/codedeploy1.png)
 
 ## CodeDeploy CLI
 
@@ -328,12 +327,16 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 ### CodeDeploy
 
+![codedeploy2](/img/codedeploy2.png)
+
 10. Create via Console
 
     Compute Plataaform: EC2/On-prenises
     Deployment type: In-place deployment
     Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ic2name]
     Service Role: CodeDeploy-Role
+
+    - aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
 
 11. Actions
 
