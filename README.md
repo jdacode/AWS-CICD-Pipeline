@@ -338,6 +338,8 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
     - aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
 
+    - aws deploy create-deployment-group --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --service-role-arn arn:aws:iam::12345678:role/CodeDeployRole --ec2-tag-filters Key=Name,Value=ec2deploy,Type=KEY_AND_VALUE --deployment-config-name CodeDeployDefault.OneAtATime
+
 11. Actions
 
         Deploy new version
