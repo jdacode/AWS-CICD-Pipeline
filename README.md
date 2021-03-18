@@ -307,12 +307,24 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 7. Create a EC2 Instance [Console]
 
-        Add tag: Key= Name, Value= ec2name
-        Attach Role
+        Attach Role: CodeDeploy-EC2-Instance-Profile
+        Add tag: Key= Name, Value= ec2deploy
+        SecurityGroup: Allow HTTP and SSH
 
-9. Install CodeDeploy agent in EC2 Instance [EC2-SSH]
+9. Install CodeDeploy Agent in EC2 Instance for Amazon Linux [EC2-SSH]
 
         https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html
+
+        - sudo yum update
+        - sudo yum install ruby
+        - sudo yum install wget
+        - pwd
+        - cd /home/ec2-user
+        - wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+        - chmod +x ./install
+        - sudo ./install auto
+        - sudo service codedeploy-agent status
+        - sudo service codedeploy-agent start
 
 ### CodeDeploy
 
