@@ -12,9 +12,9 @@
 
 ### AWS Cloud9 CLI
 
-    - ```aws cloud9 create-environment-ec2 --name my-demo-environment --description "This environment is for the AWS Cloud9 tutorial." --instance-type t2.micro --region MY-REGION --connection-type CONNECT_SSM --subnet-id subnet-12a3456b --automatic-stop-time-minutes 30 --owner-arn arn:aws:iam::123456789012:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9```
+- ```aws cloud9 create-environment-ec2 --name my-demo-environment --description "This environment is for the AWS Cloud9 tutorial." --instance-type t2.micro --region MY-REGION --connection-type CONNECT_SSM --subnet-id subnet-12a3456b --automatic-stop-time-minutes 30 --owner-arn arn:aws:iam::123456789012:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9```
 
-    - ```git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo```
+- ```git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/MyDemoRepo my-demo-repo```
 
 > AWS Cloud9 uses AWS Identity and Access Management (IAM) service-linked roles. A service-linked role is a unique type of IAM role that's linked directly to AWS Cloud9. Service-linked roles are predefined by AWS Cloud9 and include all the permissions that the service requires to call other AWS services on your behalf.
 
@@ -333,21 +333,29 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
     Compute Plataaform: EC2/On-prenises
     Deployment type: In-place deployment
-    Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ic2name]
+    Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ec2name]
     Service Role: CodeDeploy-Role
 
+
+    CREATE APPLICATION:
     - aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
 
+    SPECIFY DEPLOYMENT GROUP:
     - aws deploy create-deployment-group --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --service-role-arn arn:aws:iam::12345678:role/CodeDeployRole --ec2-tag-filters Key=Name,Value=ec2deploy,Type=KEY_AND_VALUE --deployment-config-name CodeDeployDefault.OneAtATime
+
+    CREATE DEPLOYMENT:
+    - aws deploy create-deployment --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --deployment-config-name CodeDeployDefault.OneAtATime --revision S3 --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip --description "My demo deployment" 
 
 11. Actions
 
-        Deploy new version
-        Revision location: s3://bucket-name/folder/object.zip
+    Deploy new version
+    Revision location: s3://bucket-name/folder/object.zip
+    aws deploy list-deployments
 
-12. Logs in EC2 Instance Server
+12. Logs in EC2 Instance Server [SSH]
 
-    tail -f ./aws/codedeploy-agent/codedeploy-agent.log
+    find / | grep codedeploy-agent.log
+    tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log
 
 13. Browse into the ip EC2 Instance to connect to the webpage
 
