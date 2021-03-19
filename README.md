@@ -340,13 +340,16 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 
     CREATE APPLICATION:
-        - aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
+
+        aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
 
     SPECIFY DEPLOYMENT GROUP:
-        - aws deploy create-deployment-group --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --service-role-arn arn:aws:iam::12345678:role/CodeDeployRole --ec2-tag-filters Key=Name,Value=ec2deploy,Type=KEY_AND_VALUE --deployment-config-name CodeDeployDefault.OneAtATime
+
+        aws deploy create-deployment-group --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --service-role-arn arn:aws:iam::12345678:role/CodeDeployRole --ec2-tag-filters Key=Name,Value=ec2deploy,Type=KEY_AND_VALUE --deployment-config-name CodeDeployDefault.OneAtATime
 
     CREATE DEPLOYMENT:
-        - aws deploy create-deployment --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --deployment-config-name CodeDeployDefault.OneAtATime --revision S3 --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip --description "My demo deployment" 
+
+        aws deploy create-deployment --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --deployment-config-name CodeDeployDefault.OneAtATime --revision S3 --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip --description "My demo deployment" 
 
 11. Actions
 
