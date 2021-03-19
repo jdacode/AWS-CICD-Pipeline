@@ -329,33 +329,35 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 ![codedeploy2](/img/codedeploy2.png)
 
-10. Create via Console
+10. Create CodeDeploy
 
-    Compute Plataaform: EC2/On-prenises
-    Deployment type: In-place deployment
-    Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ec2name]
-    Service Role: CodeDeploy-Role
+    CONSOLE:
+
+        Compute Plataaform: EC2/On-prenises
+        Deployment type: In-place deployment
+        Environment configuration: Amazone EC2 instances [Add tag: Key= Name, Value= ec2name]
+        Service Role: CodeDeploy-Role
 
 
     CREATE APPLICATION:
-    - aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
+        - aws deploy create-application --application-name CodeDeployNodejsApp --compute-platform Server
 
     SPECIFY DEPLOYMENT GROUP:
-    - aws deploy create-deployment-group --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --service-role-arn arn:aws:iam::12345678:role/CodeDeployRole --ec2-tag-filters Key=Name,Value=ec2deploy,Type=KEY_AND_VALUE --deployment-config-name CodeDeployDefault.OneAtATime
+        - aws deploy create-deployment-group --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --service-role-arn arn:aws:iam::12345678:role/CodeDeployRole --ec2-tag-filters Key=Name,Value=ec2deploy,Type=KEY_AND_VALUE --deployment-config-name CodeDeployDefault.OneAtATime
 
     CREATE DEPLOYMENT:
-    - aws deploy create-deployment --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --deployment-config-name CodeDeployDefault.OneAtATime --revision S3 --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip --description "My demo deployment" 
+        - aws deploy create-deployment --application-name CodeDeployNodejsApp --deployment-group-name CodeDeployNodejsGroup --deployment-config-name CodeDeployDefault.OneAtATime --revision S3 --s3-location bucket=CodeDeployDemoBucket,bundleType=zip,eTag=dd56cfdEXAMPLE8e768f9d77fEXAMPLE,key=WordPressApp.zip --description "My demo deployment" 
 
 11. Actions
 
-    Deploy new version
-    Revision location: s3://bucket-name/folder/object.zip
-    aws deploy list-deployments
+    - Deploy new version
+    - Revision location: s3://bucket-name/folder/object.zip
+    - aws deploy list-deployments
 
 12. Logs in EC2 Instance Server [SSH]
 
-    find / | grep codedeploy-agent.log
-    tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log
+    - find / | grep codedeploy-agent.log
+    - tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log
 
 13. Browse into the ip EC2 Instance to connect to the webpage
 
