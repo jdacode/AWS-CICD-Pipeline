@@ -366,23 +366,41 @@ You can use the AWS CLI or the CodeCommit console to track and manage your repos
 
 
 <br><br>
-## AWS
+## CodePipeline
 
-https://docs.aws.amazon.com/codedeploy/latest/userguide/deployments-view-logs.html
+### CodePipeline CLI
+
+    Create a Role [IAM]
+
+        aws iam create-role --role-name AWSCodePipelineServiceRole --assume-role-policy-document file://AWSCodePipeline-Trust.json
+
+    Attach Policy to Role [IAM]
+
+        aws iam put-role-policy --role-name AWSCodePipelineServiceRole --policy-name AWSCodePipelineServiceRole --policy-document file://AWSCodePipelineServiceRole.json
+
+    Change Role permission of S3 [IAM]
+
+        IAM > Roles > arn:aws:iam::12345678:role/CodeDeploy-EC2-Instance-Profile
+
+        arn:aws:s3:::replace-with-your-s3-bucket-name/*
+
+        Replace with:
+
+        arn:aws:s3:::replace-with-the-s3-pipeline-bucket-name/*
+        
+    Create Pipeline [CodePipeline]
+
+        aws codepipeline create-pipeline --cli-input-json file://pipeline.json
 
 
+### TROUBLESHOOTING
 
-To view deployment log files on Amazon Linux, RHEL, and Ubuntu Server instances
+    CodeDeploy
+        
+        Script at specified location: scripts/stop_server run as user root failed with exit code 1
 
-On Amazon Linux, RHEL, and Ubuntu Server instances, deployment logs are stored in the following location:
-
-/opt/codedeploy-agent/deployment-root/deployment-logs/codedeploy-agent-deployments.log
-
-To view or analyze deployment logs on Amazon Linux, RHEL, and Ubuntu Server instances, sign in to the instance, and then type the following command to open the CodeDeploy agent log file:
-
-less /var/log/aws/codedeploy-agent/codedeploy-agent.log
-tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log
-
+        sudo service codedeploy-agent stop
+        
 <br><br>
 ## License
 
